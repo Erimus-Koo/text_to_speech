@@ -9,17 +9,12 @@ __author__ = 'Erimus'
 需要预先写好脚本，逐行生成语音后，导入Premiere使用。
 '''
 
+import os
+import re
+import json
 import codecs
 from xunfei_tts import xunfei_tts
 
-import os
-import sys
-if os.name == 'nt':
-    root = 'D:/OneDrive/'  # PC
-else:
-    root = '/Users/Erimus/OneDrive/'  # MAC
-sys.path.append(root + '05ProgramProject/Python/')
-from erimus_toolbox import *
 
 # ═══════════════════════════════════════════════
 
@@ -60,6 +55,14 @@ def tts_every_lines(textFile):
             folder_check(fullPath)
             with codecs.open(fullPath, 'wb') as f:
                 f.write(result)
+
+
+# 文件夾若不存在 創建文件夾
+def folder_check(file):
+    path = os.path.split(file)[0]
+    if not os.path.exists(path):
+        print('Create folder:', path)
+        os.makedirs(path)
 
 
 # ═══════════════════════════════════════════════
